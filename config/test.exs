@@ -16,5 +16,5 @@ config :ascension_api, AscensionApi.Repo,
   password: "postgres",
   database: "ascension_api_test",
   hostname: System.get_env("ASCENSION_DB_HOST") || "192.168.99.100",
-  port: 32768,
+  port: System.get_env("ASCENSION_DB_PORT") || 32768,
   pool: Ecto.Adapters.SQL.Sandbox

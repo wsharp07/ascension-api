@@ -5,6 +5,7 @@ services:
 
 variables:  
   ASCENSION_DB_HOST: "postgres"
+  ASCENSION_DB_PORT: 5432
 
 before_script:  
   - mix local.rebar --force
