@@ -1,0 +1,16 @@
+image: elixir:1.3.2
+
+services:  
+  - postgres:9.5.3
+
+variables:  
+  ASCENSION_DB_HOST: "postgres"
+
+before_script:  
+  - mix local.rebar --force
+  - mix local.hex --force
+  - mix deps.get
+
+test:  
+  script:
+    - mix test
