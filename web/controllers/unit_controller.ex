@@ -1,18 +1,17 @@
 defmodule AscensionApi.UnitController do
     use AscensionApi.Web, :controller
-    alias AscensionApi.ServerService
+    alias AscensionApi.Unit
     require Logger
 
     def create(conn, %{"data" => data}) do
-        Logger.debug "creating a unit"
         attrs = JaSerializer.Params.to_attributes(data)
-        changeset = ServerService.changeset(%ServerService{}, attrs)
+        changeset = Unit.changeset(%Unit{}, attrs)
 
         case Repo.insert(changeset) do
-        {:ok, server_service} ->
+        {:ok, unit} ->
             conn
             |> put_status(:created)
-            |> render("show.json-api", data: server_service)
+            |> render("show.json-api", data: unit)
         {:error, changeset} ->
             conn
             |> put_status(:unprocessable_entity)

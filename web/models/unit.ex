@@ -1,8 +1,8 @@
-defmodule AscensionApi.ServerService do
+defmodule AscensionApi.Unit do
   use AscensionApi.Web, :model
 
   @primary_key false
-  schema "server_service" do
+  schema "unit" do
     belongs_to :server, AscensionApi.Server
     belongs_to :service, AscensionApi.Service
   end
