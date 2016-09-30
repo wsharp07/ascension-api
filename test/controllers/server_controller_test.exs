@@ -32,7 +32,7 @@ defmodule AscensionApi.ServerControllerTest do
       "relationships" => %{
         "services" => %{
           "links" => %{
-            "related" => "/server/#{server.id}/services"
+            "related" => "/servers/#{server.id}/services"
           }
         }
       }
@@ -46,13 +46,15 @@ defmodule AscensionApi.ServerControllerTest do
   end
 
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, server_path(conn, :create), @valid_attrs
+    params = Poison.encode!(%{data: %{attributes: @valid_attrs}})
+    conn = post conn, server_path(conn, :create), params
     assert json_response(conn, 201)["data"]["id"]
     assert Repo.get_by(Server, @valid_attrs)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, server_path(conn, :create), server: @invalid_attrs
+    params = Poison.encode!(%{data: %{attributes: @invalid_attrs}})
+    conn = post conn, server_path(conn, :create), params
     assert json_response(conn, 422)["errors"] != %{}
   end
 

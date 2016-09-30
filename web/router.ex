@@ -18,11 +18,16 @@ defmodule AscensionApi.Router do
   scope "/api", AscensionApi do
     pipe_through :api
 
-    resources "/services", ServiceController, except: [:new, :edit]
+    resources "/services", ServiceController, except: [:new, :edit] do
+      resources "/servers", ServerController, only: [:index]
+    end
 
     resources "/servers", ServerController, except: [:new, :edit] do
       resources "/services", ServiceController, only: [:index]
     end
+
+    # Many to Many: Server/Service
+    resources "/units", UnitController, only: [:create, :delete]
 
   end
 

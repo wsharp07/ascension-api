@@ -9,8 +9,9 @@ defmodule AscensionApi.ServerController do
     render(conn, "index.json-api", data: servers)
   end
 
-  def create(conn, server_params) do
-    changeset = Server.changeset(%Server{}, server_params)
+  def create(conn, %{"data" => data}) do
+    attrs = JaSerializer.Params.to_attributes(data)
+    changeset = Server.changeset(%Server{}, attrs)
 
     case Repo.insert(changeset) do
       {:ok, server} ->

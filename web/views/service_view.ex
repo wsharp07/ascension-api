@@ -2,6 +2,7 @@ defmodule AscensionApi.ServiceView do
   use AscensionApi.Web, :view
 
   attributes [:id, :name, :status, :is_deleted]
+  has_many :servers, link: "/services/:id/servers"
 
   def render("index.json-api", %{services: services}) do
     %{data: render_many(services, AscensionApi.ServiceView, "service.json-api")}

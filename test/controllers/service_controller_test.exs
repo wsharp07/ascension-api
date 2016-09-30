@@ -28,7 +28,15 @@ defmodule AscensionApi.ServiceControllerTest do
       "status" => service.status,
       "is-deleted" => service.is_deleted},
       "id" => Integer.to_string(service.id),
-      "type" => "service"}
+      "type" => "service",
+      "relationships" => %{
+        "servers" => %{
+          "links" => %{
+            "related" => "/services/#{service.id}/servers"
+          }
+        }
+      }
+    }
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
@@ -38,13 +46,15 @@ defmodule AscensionApi.ServiceControllerTest do
   end
 
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, service_path(conn, :create), @valid_attrs
+    params = Poison.encode!(%{data: %{attributes: @valid_attrs}})
+    conn = post conn, service_path(conn, :create), params
     assert json_response(conn, 201)["data"]["id"]
     assert Repo.get_by(Service, @valid_attrs)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, service_path(conn, :create), service: @invalid_attrs
+    params = Poison.encode!(%{data: %{attributes: @invalid_attrs}})
+    conn = post conn, service_path(conn, :create), params
     assert json_response(conn, 422)["errors"] != %{}
   end
 

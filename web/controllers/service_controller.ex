@@ -1,5 +1,6 @@
 defmodule AscensionApi.ServiceController do
   use AscensionApi.Web, :controller
+  require Logger
 
   alias AscensionApi.Service
 
@@ -8,8 +9,9 @@ defmodule AscensionApi.ServiceController do
     render(conn, "index.json-api", data: services)
   end
 
-  def create(conn, service_params) do
-    changeset = Service.changeset(%Service{}, service_params)
+  def create(conn, %{"data" => data}) do
+    attrs = JaSerializer.Params.to_attributes(data)
+    changeset = Service.changeset(%Service{}, attrs)
 
     case Repo.insert(changeset) do
       {:ok, service} ->
