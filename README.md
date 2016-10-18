@@ -1,6 +1,6 @@
 # AscensionApi
 
-[![build status](https://gitlab.com/wsharp07/ascension-api/badges/master/build.svg)](https://gitlab.com/wsharp07/ascension-api/commits/master)
+[![Build Status](https://travis-ci.org/wsharp07/ascension-api.svg?branch=master)](https://travis-ci.org/wsharp07/ascension-api)
 
 To start your Phoenix app:
 
