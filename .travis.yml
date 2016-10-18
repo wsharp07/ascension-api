@@ -6,5 +6,5 @@ otp_release:
 services:
   - postgresql
 env:
-  - ASCENSION_DB_HOST: localhost
-  - ASCENSION_DB_PORT: 5432
+  - ASCENSION_DB_HOST=localhost 
+  - ASCENSION_DB_PORT=5432
