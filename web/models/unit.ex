@@ -2,7 +2,7 @@ defmodule AscensionApi.Unit do
   use AscensionApi.Web, :model
 
   @primary_key false
-  schema "unit" do
+  schema "units" do
     belongs_to :server, AscensionApi.Server
     belongs_to :service, AscensionApi.Service
   end

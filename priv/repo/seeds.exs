@@ -13,7 +13,7 @@
 alias AscensionApi.Repo
 alias AscensionApi.Service
 alias AscensionApi.Server
-alias AscensionApi.ServerService
+alias AscensionApi.Unit
 
 [
   %Service{
@@ -27,5 +27,27 @@ alias AscensionApi.ServerService
   %Service{
     name: "MessageService",
     status: :online
+  }
+] |> Enum.each(&Repo.insert!(&1))
+
+[
+  %Server{
+    name: "HELI201",
+    ip_address: "192.168.0.10"
+  },
+  %Server{
+    name: "ARC951",
+    ip_address: "172.32.28.1"
+  },
+  %Server{
+    name: "PRD201",
+    ip_address: "10.10.2.10"
+  }
+] |> Enum.each(&Repo.insert!(&1))
+
+[
+  %Unit{
+    server_id: 1,
+    service_id: 1
   }
 ] |> Enum.each(&Repo.insert!(&1))

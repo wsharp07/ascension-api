@@ -19,7 +19,7 @@ defmodule AscensionApi.Mixfile do
   def application do
     [mod: {AscensionApi, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :exnumerator]]
+                    :phoenix_ecto, :postgrex, :exnumerator, :scrivener, :scrivener_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +41,9 @@ defmodule AscensionApi.Mixfile do
      {:poison, "~> 2.0"},
      {:exnumerator, "~> 1.2.1"},
      {:ja_serializer, "~> 0.11.0"},
-     {:corsica, "~> 0.5"}]
+     {:corsica, "~> 0.5"},
+     {:scrivener, "~> 2.0"},
+     {:scrivener_ecto, "~> 1.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

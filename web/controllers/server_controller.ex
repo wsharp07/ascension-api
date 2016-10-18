@@ -5,7 +5,7 @@ defmodule AscensionApi.ServerController do
   alias AscensionApi.Server
 
   def index(conn, _params) do
-    servers = Repo.all(Server)
+    servers = Repo.paginate(Server, _params)
     render(conn, "index.json-api", data: servers)
   end
 

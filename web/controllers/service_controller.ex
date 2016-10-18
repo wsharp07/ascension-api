@@ -5,7 +5,7 @@ defmodule AscensionApi.ServiceController do
   alias AscensionApi.Service
 
   def index(conn, _params) do
-    services = Repo.all(Service)
+    services = Repo.paginate(Service, _params)
     render(conn, "index.json-api", data: services)
   end
 
